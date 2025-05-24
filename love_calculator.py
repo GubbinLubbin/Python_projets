@@ -17,5 +17,5 @@ def calculate_love_score(name1, name2):
 your_name = input("Enter your name:")
 soulmate_name = input("Enter your soulmate name:")
 score = calculate_love_score(your_name, soulmate_name)
-print("This is just a stupid calculation,there no calculation for your relation immense love but whatever it is:")
+print("This is just a stupid calculation,there no calculation for your immense love but whatever for the purpose of course it is as follows:")
 print(score)

@@ -1,28 +1,15 @@
-from tkinter import *
 import requests
+from bs4 import BeautifulSoup
 
+URL = "https://web.archive.org/web/20200518073855/https://www.empireonline.com/movies/features/best-movies-2/"
 
-def get_quote():
-    response=requests.get(url="https://api.kanye.rest")
-    response.raise_for_status()
-    ran_quote=response.json()["quote"]
-    canvas.itemconfig(quote_text,text=ran_quote)
-
-
-window = Tk()
-window.title("Kanye Says...")
-window.config(padx=50, pady=50)
-
-canvas = Canvas(width=300, height=414)
-background_img = PhotoImage(file="background.png")
-canvas.create_image(150, 207, image=background_img)
-quote_text = canvas.create_text(150, 207, text="Click my pic to get quote ", width=250, font=("Arial", 30, "bold"), fill="white")
-canvas.grid(row=0, column=0)
-
-kanye_img = PhotoImage(file="kanye.png")
-kanye_button = Button(image=kanye_img, highlightthickness=0, command=get_quote)
-kanye_button.grid(row=1, column=0)
-
-
-
-window.mainloop()
+# Write your code below this line 👇
+html=requests.get(url=URL)
+soup=BeautifulSoup(html.text,"html.parser")
+List= soup.find("div", attrs={"class": "gallery", "data-template-type": "inline"}).find_all("h3",attrs={"class":"title"})
+# for elements in List:
+#     print(elements.get_text())
+with open("best_movies.txt","w") as file:
+    for elements in List:
+        file.write(f"{elements.get_text()}\n)")
+        
